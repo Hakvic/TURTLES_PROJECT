@@ -8,15 +8,26 @@ public class Joueur {
     private boolean gagnant;
     private ArrayDeque<Carte> main_joueur;
     private ArrayDeque<Carte> jeu_carte;
+    private ArrayDeque<Carte> defausse;
     private ArrayDeque<Carte> programme;
-    private List<MurGlace> glaces;
-    private List<MurPierre> pierres;
+    private ArrayDeque<Obstacle> obstacles;
     private Tortue tortue;
-    private Joyaux joyaux;
+    private int numero; // Gonzague
 
-    public Joueur(String nom, boolean gagnant){
+
+    public Joueur(String nom, boolean gagnant, int numero){
         this.nom = nom;
         this.gagnant = gagnant;
+        this.numero = numero;
+        this.tortue = new Tortue(numero);
+
+    }
+
+    //Celui utilise par Gonzague
+    public Joueur(String nom, int numero){
+        this.nom = nom;
+        this.numero = numero;
+        this.tortue = new Tortue(numero);
     }
 
     public String getNom(){
@@ -27,6 +38,10 @@ public class Joueur {
         return gagnant;
     }
 
+    public Tortue getTortue(){
+        return tortue;
+    }
+
     public ArrayDeque<Carte> getJeuCarte(){
         return jeu_carte;
     }
@@ -35,7 +50,7 @@ public class Joueur {
         return main_joueur;
     }
 
-    public void jeuCarte(){
+    public void initJeuCarte(){
         ArrayList<Carte> jeu_carte_list = new ArrayList<Carte>();
 
         for (int i = 0; i<18; i++){
@@ -54,11 +69,22 @@ public class Joueur {
         jeu_carte = new ArrayDeque<Carte>(jeu_carte_list);
     }
 
-    public void mainJoueur(){
+    public void initMainJoueur(){
         main_joueur = new ArrayDeque<Carte>();
         for(int i=0; i<5; i++){
             main_joueur.add(jeu_carte.pollFirst());
         }
+    }
+
+    public void initObstacles(){
+        obstacles = new ArrayDeque<Obstacle>();
+        for(int i = 0; i<3; i++){
+            obstacles.add(new Obstacle("murs"));
+        }
+        for(int i = 0; i<2; i++){
+            obstacles.add(new Obstacle("glaces"));
+        }
+
     }
 
 }

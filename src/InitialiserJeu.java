@@ -34,7 +34,7 @@ public class InitialiserJeu {
 
     public void initJoueur(){
         for(Joueur joueur: joueurs){
-            joueur.jeuCarte();
+            joueur.initJeuCarte();
             System.out.println(joueur.getJeuCarte());
             System.out.println(joueur.getJeuCarte().size());
 
