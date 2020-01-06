@@ -18,9 +18,14 @@ public class Plateau {
 		if(listeJoueurs.size() == 2)
 		{
 			plateau[0][1] = listeJoueurs.get(0).tortue;
-			plateau[0][4] = listeJoueurs.get(0).tortue;
-			plateau[6][3] = new Joyaux();
+			plateau[0][5] = listeJoueurs.get(0).tortue;
+			plateau[7][3] = new Joyaux();
+			
 		}
+		
+		for (int i = 0; i < 8; i++) {
+			plateau[i][7] = new Caisse();
+        }
 		
 	}
 	
@@ -34,6 +39,8 @@ public class Plateau {
             		System.out.print(" |");
             	if(plateau[i][j].type == "joyau")
             		System.out.print("j|");
+            	if(plateau[i][j].type == "caisse")
+            		System.out.print("c|");
             }
         }
 	}
