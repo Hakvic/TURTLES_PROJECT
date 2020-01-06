@@ -11,12 +11,20 @@ public class Joueur {
     private ArrayDeque<Carte> programme;
     private List<MurGlace> glaces;
     private List<MurPierre> pierres;
-    private Tortue tortue;
+    public Tortue tortue;
     private Joyaux joyaux;
+    private int numero;
 
     public Joueur(String nom, boolean gagnant){
         this.nom = nom;
         this.gagnant = gagnant;
+    }
+    
+    //Celui utilise par Gonzague
+    public Joueur(String nom, int numero){
+        this.nom = nom;
+        this.numero = numero;
+        this.tortue = new Tortue(numero);
     }
 
     public String getNom(){

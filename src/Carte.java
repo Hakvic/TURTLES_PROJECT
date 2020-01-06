@@ -1,7 +1,7 @@
 public class Carte {
 
     private String couleur;
-    private String type;
+    public String type;
 
     public Carte(String couleur, String type){
         this.couleur = couleur;

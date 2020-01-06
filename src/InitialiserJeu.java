@@ -2,21 +2,25 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import sun.management.counter.Variability;
+
 public class InitialiserJeu {
     public ArrayList<Joueur> joueurs = new ArrayList<>();
     public static Scanner scanner = new Scanner(System.in);
 
 
     public void displayMenu() {
-        System.out.println("choix ");
+        System.out.println("Nombre de joueurs");
         int choice = scanner.nextInt();
         System.out.println(choice);
         switch (choice) {
-            case 1:
-                addJoueur();
-                initJoueur();
-                break;
             case 2:
+            case 3:
+            case 4:
+            	for(int i=0; i<choice; i++)
+            	{
+            		System.out.println("Nom du joueur 1");
+            	}
                 break;
             default:
                 System.out.println("Erreur de saisie");
@@ -24,7 +28,7 @@ public class InitialiserJeu {
     }
 
     public void addJoueur() {
-        System.out.println("Saisissez le nom de l'artiste");
+        System.out.println("Saisissez le nom du joueur");
         String empty = scanner.nextLine();
         String name = scanner.nextLine(); // parsing voir tp
         System.out.println(name);
