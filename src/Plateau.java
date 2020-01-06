@@ -18,14 +18,43 @@ public class Plateau {
 		if(listeJoueurs.size() == 2)
 		{
 			plateau[0][1] = listeJoueurs.get(0).tortue;
-			plateau[0][5] = listeJoueurs.get(0).tortue;
+			plateau[0][5] = listeJoueurs.get(1).tortue;
 			plateau[7][3] = new Joyaux();
+			
+			for (int i = 0; i < 8; i++) {
+				plateau[i][7] = new Caisse();
+	        }
 			
 		}
 		
-		for (int i = 0; i < 8; i++) {
-			plateau[i][7] = new Caisse();
-        }
+		if(listeJoueurs.size() == 3)
+		{
+			plateau[0][0] = listeJoueurs.get(0).tortue;
+			plateau[0][3] = listeJoueurs.get(1).tortue;
+			plateau[0][6] = listeJoueurs.get(2).tortue;
+			
+			plateau[7][0] = new Joyaux();
+			plateau[7][3] = new Joyaux();
+			plateau[7][6] = new Joyaux();
+			
+			for (int i = 0; i < 8; i++) {
+				plateau[i][7] = new Caisse();
+	        }
+			
+		}
+		
+		if(listeJoueurs.size() == 4)
+		{
+			plateau[0][0] = listeJoueurs.get(0).tortue;
+			plateau[0][2] = listeJoueurs.get(1).tortue;
+			plateau[0][5] = listeJoueurs.get(2).tortue;
+			plateau[0][7] = listeJoueurs.get(3).tortue;
+			
+			plateau[7][1] = new Joyaux();
+			plateau[7][6] = new Joyaux();
+			
+		}
+		
 		
 	}
 	
