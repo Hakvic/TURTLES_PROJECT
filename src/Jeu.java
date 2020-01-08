@@ -8,10 +8,19 @@ public class Jeu {
 	//Partie console
 	public static Scanner scanner = new Scanner(System.in);
 	
+	
+	public static Plateau plateauJeu= new Plateau();
+	
 	public static void initialiserPartie() {
 		initialiserJoueurs();
-		Plateau plateauJeu= new Plateau();
+		plateauJeu= new Plateau();
 		plateauJeu.initialiser(joueurs);
+		plateauJeu.afficher();
+		
+		System.out.println("Next");
+		scanner.nextInt();
+		
+		joueurs.get(0).tortue.type = "turtule";
 		plateauJeu.afficher();
 		
 	}
