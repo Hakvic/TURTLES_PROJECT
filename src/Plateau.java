@@ -18,8 +18,8 @@ public class Plateau {
 		if(listeJoueurs.size() == 2)
 		{
 			plateau[0][1] = listeJoueurs.get(0).tortue;
-			listeJoueurs.get(0).tortue.posX = 0;
-			listeJoueurs.get(0).tortue.posX = 1;
+			listeJoueurs.get(0).tortue.posi = 0;
+			listeJoueurs.get(0).tortue.posi= 1;
 			plateau[0][5] = listeJoueurs.get(1).tortue;
 			plateau[7][3] = new Joyaux();
 			
@@ -80,27 +80,113 @@ public class Plateau {
         }
 	}
 	
+	
+	public static void avancerTortue(Joueur leJoueur) {
+		int i,j;
+		for (i = 0; i < 8; i++) {
+            for (j = 0; j < 8; j++) {
+            	if(plateau[i][j] == leJoueur.tortue)
+            	{
+            		plateau[i][j+1] = leJoueur.tortue;
+            		plateau[i][j] = new Tuile();
+            		return;
+            		
+            	}
+            }
+        }
+		
+	}
 	public static void avancerTortueJoueur(Joueur leJoueur) {
 		Boolean error = false;
 		int i,j;
 		for (i = 0; i < 8; i++) {
             for (j = 0; j < 8; j++) {
-                
+            	if(plateau[i][j] == leJoueur.tortue)
+            	{
+            		leJoueur.tortue.posi = i;
+            		leJoueur.tortue.posj = j;
+            	}
             }
         }
+		
+		
 		switch (leJoueur.tortue.direction) {
 		case 'N':
+			if(leJoueur.tortue.posi > 0)
+			{
+				if(plateau[leJoueur.tortue.posi - 1][leJoueur.tortue.posj].type == "vide")
+				{
+					plateau[leJoueur.tortue.posi - 1][leJoueur.tortue.posj] = leJoueur.tortue;
+		    		plateau[leJoueur.tortue.posi][leJoueur.tortue.posj] = new Tuile();
+				}
+				
+			}
 			break;
 		case 'S':
+			if( leJoueur.tortue.posi < 7)
+			{
+				if(plateau[leJoueur.tortue.posi + 1][leJoueur.tortue.posj].type == "vide")
+				{
+					plateau[leJoueur.tortue.posi + 1][leJoueur.tortue.posj] = leJoueur.tortue;
+		    		plateau[leJoueur.tortue.posi][leJoueur.tortue.posj] = new Tuile();
+				}
+				
+			}
+			else 
+			{
+				//il ya une erreur
+			}
+			
 			break;
 		case 'O':
+			if(leJoueur.tortue.posj > 0)
+			{
+				if(plateau[leJoueur.tortue.posi][leJoueur.tortue.posj - 1].type == "vide")
+				{
+					plateau[leJoueur.tortue.posi][leJoueur.tortue.posj - 1] = leJoueur.tortue;
+		    		plateau[leJoueur.tortue.posi][leJoueur.tortue.posj] = new Tuile();
+				}
+				
+			}
 			break;
 		case 'E':
+			if( leJoueur.tortue.posj < 7)
+			{
+				if(plateau[leJoueur.tortue.posi][leJoueur.tortue.posj + 1].type == "vide")
+				{
+					plateau[leJoueur.tortue.posi][leJoueur.tortue.posj + 1] = leJoueur.tortue;
+		    		plateau[leJoueur.tortue.posi][leJoueur.tortue.posj] = new Tuile();
+				}
+				
+			}
 			break;
 
 		default:
 			break;
 		}
 		
+	}
+	
+	public static void pivoterdroiteTortueJoueur(Joueur leJoueur) {
+		if(leJoueur.tortue.direction == 'N')
+			leJoueur.tortue.direction = 'E';
+		
+		else if (leJoueur.tortue.direction == 'E')
+			leJoueur.tortue.direction = 'S';
+		
+		else if (leJoueur.tortue.direction == 'S')
+			leJoueur.tortue.direction = 'O';
+		
+		else if (leJoueur.tortue.direction == 'O')
+			leJoueur.tortue.direction = 'N';
+	}
+	
+	public static void pivotergaucheTortueJoueur(Joueur leJoueur)
+	{
+		//trois pivot à droite équivaut à un pivot à gauche
+		for(int i = 0; i < 3; i++)
+		{
+			pivoterdroiteTortueJoueur(leJoueur);
+		}
 	}
 }

@@ -19,8 +19,12 @@ public class Jeu {
 		
 		System.out.println("Next");
 		scanner.nextInt();
+		plateauJeu.pivoterdroiteTortueJoueur(joueurs.get(0));
+		plateauJeu.avancerTortueJoueur(joueurs.get(0));
+		plateauJeu.pivoterdroiteTortueJoueur(joueurs.get(0));
+		plateauJeu.avancerTortueJoueur(joueurs.get(0));
+		plateauJeu.avancerTortueJoueur(joueurs.get(0));
 		
-		joueurs.get(0).tortue.type = "turtule";
 		plateauJeu.afficher();
 		
 	}
