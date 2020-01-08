@@ -96,8 +96,7 @@ public class Plateau {
         }
 		
 	}
-	public static void avancerTortueJoueur(Joueur leJoueur) {
-		Boolean error = false;
+	public static void miseajourPositionTortue(Joueur leJoueur) {
 		int i,j;
 		for (i = 0; i < 8; i++) {
             for (j = 0; j < 8; j++) {
@@ -108,8 +107,13 @@ public class Plateau {
             	}
             }
         }
+	}
+	public static void avancerTortueJoueur(Joueur leJoueur) {
+		//faire les algos en cas d'erreur
+		Boolean error = false;
 		
 		
+		miseajourPositionTortue(leJoueur);
 		switch (leJoueur.tortue.direction) {
 		case 'N':
 			if(leJoueur.tortue.posi > 0)
