@@ -2,6 +2,8 @@ public class Tortue extends Tuile {
     public String couleur;
     public char direction;
     public int numeroTortue;
+    public int posX;
+    public int posY;
 
     public Tortue(String couleur, char direction){
         // appeler le constructeur de la classe mere
