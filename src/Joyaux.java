@@ -3,7 +3,7 @@ public class Joyaux extends Tuile {
 
     public Joyaux(){
         // appeler le constructeur de la classe mere
-        this.type = "joyau";
+        this.type = constante.TUILE.joyau;
     }
 
     public String getCouleur(){

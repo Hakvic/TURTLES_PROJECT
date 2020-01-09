@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import sun.management.counter.Variability;
+
 public class Jeu {
 	//liste des joueurs de la partie
 	public static ArrayList<Joueur> joueurs = new ArrayList<>();
@@ -17,15 +19,48 @@ public class Jeu {
 		plateauJeu.initialiser(joueurs);
 		plateauJeu.afficher();
 		
-		System.out.println("Next");
+		System.out.println("Next\n");
+		
 		scanner.nextInt();
-		plateauJeu.pivoterdroiteTortueJoueur(joueurs.get(0));
+		joueurs.get(0).tortue.pivoterDroite();
 		plateauJeu.avancerTortueJoueur(joueurs.get(0));
-		plateauJeu.pivoterdroiteTortueJoueur(joueurs.get(0));
+		joueurs.get(0).tortue.pivoterDroite();
 		plateauJeu.avancerTortueJoueur(joueurs.get(0));
 		plateauJeu.avancerTortueJoueur(joueurs.get(0));
 		
 		plateauJeu.afficher();
+		
+		do {
+			Joueur leJoueur = joueurs.get(0);
+			plateauJeu.afficher();
+			System.out.println("\n1. avancer\n"
+					+ "2. pivoter droite\n"
+					+ "3. pivoter gauche\n"
+					+ "4. poser un mur");
+			switch (scanner.nextInt()) {
+			case 1:
+				plateauJeu.avancerTortueJoueur(leJoueur);
+				break;
+			case 2:
+				leJoueur.tortue.pivoterDroite();
+				break;
+			case 3:
+				leJoueur.tortue.pivoterGauche();
+			case 4:
+				System.out.println("posI?\n");
+				int posI = scanner.nextInt();
+				
+				System.out.println("posJ?\n");
+				int posJ = scanner.nextInt();
+				
+				plateauJeu.construireMurPierre(posI, posJ);
+					
+			default:
+				break;
+			}
+			
+			
+		}while(!joueurs.get(0).gagnant);
 		
 	}
 	private static void initialiserJoueurs(){

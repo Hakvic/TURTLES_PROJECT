@@ -1,20 +1,21 @@
 public class Tortue extends Tuile {
     public String couleur;
-    public char direction;
+    public constante.DIRECTION direction;
     public int numeroTortue;
     public int posi;
     public int posj;
 
-    public Tortue(String couleur, char direction){
+    public Tortue(String couleur, constante.DIRECTION direction){
         // appeler le constructeur de la classe mere
-        this.type = "tortue";
+        this.type = constante.TUILE.tortue;
         this.couleur = couleur;
         this.direction = direction;
     }
     
     public Tortue(int numero){
         // appeler le constructeur de la classe mere
-        this.type = "tortue";
+        this.type = constante.TUILE.tortue;
+        
         switch (numero) {
 		//si numero de tor
         case 0:
@@ -33,6 +34,14 @@ public class Tortue extends Tuile {
 		default:
 			break;
 		}
-        this.direction = 'N';
+        this.direction = constante.DIRECTION.NORD;
     }
+    
+    public void pivoterDroite() {
+		this.direction = direction.suivant();
+	}
+    
+    public void pivoterGauche() {
+		this.direction = direction.precedent();
+	}
 }

@@ -5,7 +5,7 @@ public class Joueur {
 
     private String nom;
 
-    private boolean gagnant;
+    public boolean gagnant;
     private ArrayDeque<Carte> main_joueur;
     private ArrayDeque<Carte> jeu_carte;
     private ArrayDeque<Carte> programme;

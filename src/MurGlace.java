@@ -2,12 +2,9 @@ public class MurGlace extends Tuile{
 
     public MurGlace(){
 
-        this.type = "mur_glace";
+        this.type = constante.TUILE.murGlace;
     }
 
-    public String getType(){
-        return type;
-    }
 }
 
 

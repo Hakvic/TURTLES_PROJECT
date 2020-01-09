@@ -1,8 +1,8 @@
 public class Tuile {
 
-    public String type;
+    public constante.TUILE type;
 
     public Tuile(){
-    	type="vide";
+    	type = constante.TUILE.vide;
     }
 }
