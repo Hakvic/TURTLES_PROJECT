@@ -193,4 +193,14 @@ public class Plateau {
 			pivoterdroiteTortueJoueur(leJoueur);
 		}
 	}
+	
+	public static void construireMurPierre(int posI, int posJ)
+	{
+		if(posI >= 0 && posI <= 8 && posJ >= 0 && posJ <= 8)
+		{
+			if (plateau[posI][posJ].type == "vide") {
+				plateau[posI][posJ].type = "murPierre";
+			}
+		}
+	}
 }
