@@ -17,43 +17,64 @@ public class Jeu {
 		initialiserJoueurs();
 		plateauJeu= new Plateau();
 		plateauJeu.initialiser(joueurs);
-		plateauJeu.afficher();
+		//plateauJeu.afficher();
 		
-		System.out.println("Next\n");
+		//System.out.println("Next\n");
 		
-		scanner.nextInt();
-		joueurs.get(0).tortue.pivoterDroite();
-		plateauJeu.avancerTortueJoueur(joueurs.get(0));
-		joueurs.get(0).tortue.pivoterDroite();
-		plateauJeu.avancerTortueJoueur(joueurs.get(0));
-		plateauJeu.avancerTortueJoueur(joueurs.get(0));
+		//scanner.nextInt();
+		//joueurs.get(0).tortue.pivoterDroite();
+		//plateauJeu.avancerTortueJoueur(joueurs.get(0));
+		//joueurs.get(0).tortue.pivoterDroite();
+		//plateauJeu.avancerTortueJoueur(joueurs.get(0));
+		//plateauJeu.avancerTortueJoueur(joueurs.get(0));
 		
-		plateauJeu.afficher();
+		//plateauJeu.afficher();
 		
 		do {
 			Joueur leJoueur = joueurs.get(0);
 			plateauJeu.afficher();
 			System.out.println("\n1. avancer\n"
-					+ "2. pivoter droite\n"
-					+ "3. pivoter gauche\n"
-					+ "4. poser un mur");
+					+ "2. pivoter gauche\n"
+					+ "3. pivoter droite\n"
+					+ "4. poser un mur de p\n"
+					+ "5. poser un mur de g\n"
+					+ "6. lacher une caisse\n"
+					+ "7. laser");
 			switch (scanner.nextInt()) {
 			case 1:
 				plateauJeu.avancerTortueJoueur(leJoueur);
 				break;
-			case 2:
+			case 3:
 				leJoueur.tortue.pivoterDroite();
 				break;
-			case 3:
+			case 2:
 				leJoueur.tortue.pivoterGauche();
 				break;
 			case 4:
-				System.out.println("posI?\n");
+				System.out.println("posI?");
 				int posI = scanner.nextInt();
-				
-				System.out.println("posJ?\n");
+				System.out.println("posJ?");
 				int posJ = scanner.nextInt();
 				plateauJeu.construireMurPierre(posI, posJ);
+				break;
+			case 5 : 
+				System.out.println("posI?");
+				int posi = scanner.nextInt();
+				System.out.println("posJ?");
+				int posj = scanner.nextInt();
+				plateauJeu.construireMurGlace(posi, posj);
+				break;
+			case 6 : 
+				System.out.println("posI?");
+				int posa = scanner.nextInt();
+				System.out.println("posJ?");
+				int posb = scanner.nextInt();
+				plateauJeu.construireCaisse(posa, posb);
+				break;
+				
+			case 7 : 
+				plateauJeu.laser(joueurs.get(0));
+				break;
 					
 			default:
 				break;

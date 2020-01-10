@@ -96,6 +96,8 @@ public class Plateau {
             		System.out.print("c|");
             	else if(plateau[i][j].type == constante.TUILE.murPierre)
             		System.out.print("p|");
+            	else if(plateau[i][j].type == constante.TUILE.murGlace)
+            		System.out.print("g|");
             	
             }
             
@@ -173,12 +175,16 @@ public class Plateau {
 			leJoueur.tortue.demiTour();
 			break;
 		case tortue:
-			leJoueur.tortue.retournerPositionInit = true;
-			if (plateau[leJoueur.tortue.posi + differencePosi][leJoueur.tortue.posj + differencePosj] instanceof Tortue) {
-				Tortue autreTortue = (Tortue) plateau[leJoueur.tortue.posi + differencePosi][leJoueur.tortue.posj + differencePosj];
-				autreTortue.retournerPositionInit = true;
-				plateau[leJoueur.tortue.posi + differencePosi][leJoueur.tortue.posj + differencePosj] = autreTortue;		
+			if(plateau[leJoueur.tortue.posi + differencePosi][leJoueur.tortue.posj + differencePosj] != leJoueur.tortue)
+			{
+				leJoueur.tortue.retournerPositionInit = true;
+				if (plateau[leJoueur.tortue.posi + differencePosi][leJoueur.tortue.posj + differencePosj] instanceof Tortue) {
+					Tortue autreTortue = (Tortue) plateau[leJoueur.tortue.posi + differencePosi][leJoueur.tortue.posj + differencePosj];
+					autreTortue.retournerPositionInit = true;
+					plateau[leJoueur.tortue.posi + differencePosi][leJoueur.tortue.posj + differencePosj] = autreTortue;		
+				}
 			}
+			
 			break;
 		case caisse:
 			int tempi = leJoueur.tortue.posi + differencePosi + differencePosi;
@@ -196,13 +202,95 @@ public class Plateau {
 					plateau[leJoueur.tortue.posi][leJoueur.tortue.posj] = new Tuile();
 				}
 			}
-			
+			break;
 
 		default:
 			break;
 		}
 		miseajourPositionTortue();
-		retournerPositioninit(leJoueur);
+		retournerPositioninit(leJoueur.tortue);
+		
+	}
+	
+	public void laser(Joueur leJoueur) {
+		miseajourPositionTortue();
+		int differencePosi=0, differencePosj = 0;
+		int tempi = leJoueur.tortue.posi;
+		int tempj = leJoueur.tortue.posj;
+		
+		switch (leJoueur.tortue.direction) {
+		case NORD:
+			if(leJoueur.tortue.posi > 0)
+			{
+				differencePosi = -1;
+			}
+			break;
+		case SUD:
+			if( leJoueur.tortue.posi < 7)
+			{
+				differencePosi = 1;
+			}
+			
+			break;
+		case OUEST:
+			if(leJoueur.tortue.posj > 0)
+			{
+				differencePosj = -1;
+				
+			}
+			break;
+		case EST:
+			if( leJoueur.tortue.posj < 7)
+			{
+				differencePosj = 1;
+			}
+			break;
+		default:
+			break;
+		}
+		int nexti = 0, nextj=0;
+		do {
+			tempi += differencePosi;
+			tempj += differencePosj;
+			nexti = tempi + differencePosi;
+			nextj = tempj + differencePosj;
+			
+		}while( plateau[tempi][tempj].isVide() && nexti != 8 && nexti != -1 && nextj != 8 && nextj != -1);
+		
+
+		switch (plateau[tempi][tempj].type) {
+		case tortue:
+			if(listeJoueurs.size() == 2)
+			{
+				Tortue autreTortue = (Tortue) plateau[tempi][tempj];
+				autreTortue.demiTour();
+				plateau[tempi][tempj] = autreTortue;			
+			}
+			else {
+				Tortue autreTortue = (Tortue) plateau[tempi][tempj];
+				retournerPositioninit(autreTortue);
+			}
+			break;
+		case joyau :
+			if(listeJoueurs.size() == 2)
+			{
+				leJoueur.tortue.demiTour();			
+			}
+			else {
+				retournerPositioninit(leJoueur.tortue);
+			}
+			break;
+		case murGlace:
+			plateau[tempi][tempj] = new Tuile();
+			break;
+		case murPierre:
+		case caisse:
+			break;
+
+		default:
+			break;
+		}
+		
 		
 	}
 	
@@ -236,34 +324,34 @@ public class Plateau {
 		}
 	}
 	
-	public static void retournerPositioninit(Joueur leJoueur) {
+	public static void retournerPositioninit(Tortue tortue) {
 		miseajourPositionTortue();
-		int posi = leJoueur.tortue.initi;
-		int posj = leJoueur.tortue.initj;
+		int posi = tortue.initi;
+		int posj = tortue.initj;
 		
-		if(leJoueur.tortue.retournerPositionInit)
+		if(tortue.retournerPositionInit)
 		{
 			if(plateau[posi][posj].isVide())
 			{
-				plateau[posi][posj] = leJoueur.tortue;
-				plateau[leJoueur.tortue.posi][leJoueur.tortue.posj] = new Tuile();
-				leJoueur.tortue.retournerPositionInit = false;
+				plateau[posi][posj] = tortue;
+				plateau[tortue.posi][tortue.posj] = new Tuile();
+				tortue.retournerPositionInit = false;
 			}
 			else if ( plateau[posi][posj+1].isVide() ) {
-				plateau[posi][posj+1] = leJoueur.tortue;
-				plateau[leJoueur.tortue.posi][leJoueur.tortue.posj] = new Tuile();
-				leJoueur.tortue.retournerPositionInit = false;
+				plateau[posi][posj+1] = tortue;
+				plateau[tortue.posi][tortue.posj] = new Tuile();
+				tortue.retournerPositionInit = false;
 			}
 			else if (plateau[posi][posj-1].isVide()) {
-				plateau[posi][posj-1] = leJoueur.tortue;
-				plateau[leJoueur.tortue.posi][leJoueur.tortue.posj] = new Tuile();	
-				leJoueur.tortue.retournerPositionInit = false;
+				plateau[posi][posj-1] = tortue;
+				plateau[tortue.posi][tortue.posj] = new Tuile();	
+				tortue.retournerPositionInit = false;
 			}
 			else if(plateau[posi + 1][posj].isVide())
 			{
-				plateau[posi + 1][posj] = leJoueur.tortue;
-				plateau[leJoueur.tortue.posi][leJoueur.tortue.posj] = new Tuile();
-				leJoueur.tortue.retournerPositionInit = false;
+				plateau[posi + 1][posj] = tortue;
+				plateau[tortue.posi][tortue.posj] = new Tuile();
+				tortue.retournerPositionInit = false;
 			}
 			
 		}
