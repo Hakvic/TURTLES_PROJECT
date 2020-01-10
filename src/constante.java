@@ -10,6 +10,8 @@ public class constante {
 	
 	public enum  DIRECTION{
 	    NORD,EST,SUD,OUEST,;
+		
+		
 		private static DIRECTION[] vals = values();
 	    public DIRECTION suivant()
 	    {

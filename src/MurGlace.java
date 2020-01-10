@@ -4,6 +4,10 @@ public class MurGlace extends Tuile{
 
         this.type = constante.TUILE.murGlace;
     }
+    
+    public boolean isMurGlace() {
+    	return true;
+	}
 
 }
 

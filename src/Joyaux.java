@@ -9,6 +9,11 @@ public class Joyaux extends Tuile {
     public String getCouleur(){
         return couleur;
     }
+    
+    public boolean isJoyau() {
+    	return true;
+    }
+    
 }
 
 

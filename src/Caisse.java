@@ -4,4 +4,8 @@ public class Caisse extends Tuile{
 
         this.type = constante.TUILE.caisse;
     }
+    
+    public boolean isCaisse() {
+    	return true;
+	}
 }

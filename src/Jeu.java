@@ -46,13 +46,13 @@ public class Jeu {
 				break;
 			case 3:
 				leJoueur.tortue.pivoterGauche();
+				break;
 			case 4:
 				System.out.println("posI?\n");
 				int posI = scanner.nextInt();
 				
 				System.out.println("posJ?\n");
 				int posJ = scanner.nextInt();
-				
 				plateauJeu.construireMurPierre(posI, posJ);
 					
 			default:
