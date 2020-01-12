@@ -24,5 +24,10 @@ public class constante {
 	    }
 	}
 	
+	public enum CARTE
+	{
+		BLEUE, JAUNE, VIOLETTE, LASER
+	}
+	
 	
 }

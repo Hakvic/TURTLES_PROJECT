@@ -81,13 +81,34 @@ public class Plateau {
 	}
 	
 	//affiche le plateau dans la console
-	public static void afficher() {
+	public void afficher() {
 		System.out.print(" 0 1 2 3 4 5 6 7");
 		for (int i = 0; i < 8; i++) {
 			System.out.print("\n" + i);
             for (int j = 0; j < 8; j++) {
             	if(plateau[i][j].type == constante.TUILE.tortue)
-            		System.out.print("t|");
+            	{
+            		Tortue thisTortue = (Tortue) plateau[i][j];
+            		switch (thisTortue.direction) {
+					case NORD:
+						System.out.print("^|");
+						break;
+					case EST:
+						System.out.print(">|");
+						break;
+					case SUD:
+						System.out.print("v|");
+						break;
+					case OUEST:
+						System.out.print("<|");
+						break;
+							
+
+					default:
+						break;
+					}
+            	}
+            		
             	else if(plateau[i][j].type == constante.TUILE.vide)
             		System.out.print(" |");
             	else if(plateau[i][j].type == constante.TUILE.joyau)

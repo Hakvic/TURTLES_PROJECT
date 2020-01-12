@@ -1,18 +1,9 @@
 public class Carte {
 
-    private String couleur;
-    public String type;
+    public constante.CARTE couleur;
 
-    public Carte(String couleur, String type){
+    public Carte(constante.CARTE couleur){
         this.couleur = couleur;
-        this.type = type;
     }
 
-    public String getCouleur(){
-        return couleur;
-    }
-
-    public String getType(){
-        return type;
-    }
 }

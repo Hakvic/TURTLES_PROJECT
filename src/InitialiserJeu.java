@@ -38,7 +38,6 @@ public class InitialiserJeu {
 
     public void initJoueur(){
         for(Joueur joueur: joueurs){
-            joueur.jeuCarte();
             System.out.println(joueur.getJeuCarte());
             System.out.println(joueur.getJeuCarte().size());
 
