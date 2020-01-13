@@ -12,11 +12,9 @@ public class Joueur {
     private ArrayDeque<Carte> jeu_carte;
     public ArrayDeque<Carte> programme;
     
-    private int nbMurGlace;
-    private int nbMurPierre;
-    private int nbCaisse;
-    
-    private List<MurPierre> pierres;
+    public int nbMurGlace;
+    public int nbMurPierre;
+    public int nbCaisse;
     public Tortue tortue;
     private Joyaux joyaux;
     private int numero;
@@ -27,9 +25,9 @@ public class Joueur {
     }
     
     //Celui utilise par Gonzague
-    public Joueur(String nom, int numero){
+    public Joueur(String nom, int num){
         this.nom = nom;
-        this.numero = numero;
+        this.numero = num;
         this.tortue = new Tortue(numero);
         this.jeu_carte = initialiserJeuCarte();
         this.nbCaisse = 2;
@@ -88,6 +86,41 @@ public class Joueur {
     
     public void ajouterAuProgramme(Carte uneCarte) {
     	programme.add(uneCarte);
+	}
+    
+    public boolean peutPoserMurPierre() {
+    	if(nbMurPierre > 0)
+    	{
+    		nbMurPierre--;
+    		return true;
+    	}
+    	else {
+			return false;
+		}
+		
+	}
+    
+    public boolean peutPoserMurGlace() {
+    	if(nbMurGlace > 0)
+    	{
+    		nbMurGlace--;
+    		return true;
+    	}
+    	else {
+			return false;
+		}
+		
+	}
+    public boolean peutPoserCaisse() {
+    	if(nbCaisse > 0)
+    	{
+    		nbCaisse--;
+    		return true;
+    	}
+    	else {
+			return false;
+		}
+		
 	}
 
 }

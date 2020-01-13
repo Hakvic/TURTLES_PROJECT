@@ -29,5 +29,10 @@ public class constante {
 		BLEUE, JAUNE, VIOLETTE, LASER
 	}
 	
+	public enum COULEUR
+	{
+		BLEU, ROUGE, VERT, JAUNE
+	}
+	
 	
 }

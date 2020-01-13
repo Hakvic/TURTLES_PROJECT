@@ -29,7 +29,7 @@ public class Jeu {
 				joueurs.remove(leJoueur);
 				gagnants.add(leJoueur);
 			}
-			
+			//LUDO affiche l'ordre des gagnats si il y en a
 			if (gagnants.size() > 0) {
 				System.out.println("Ordre des gagnants");
 				for (int i = 0; i < gagnants.size(); i++) {
@@ -46,7 +46,7 @@ public class Jeu {
 		
 	}
 	private static void initialiserJoueurs(){
-		
+		//LUDO : demande le nombre d'utilisateurs
 		System.out.println("Nombre de joueurs");
         
 		int choice;
@@ -70,6 +70,8 @@ public class Jeu {
 	
 	private static void initialiserNJoueurs(int n)
 	{
+		
+		//LUDO pour le nombre de joueurs, demander la saisie du nom
 		String nomJoueurString;
 		int numeroJoueur;
 		scanner.nextLine();
@@ -148,39 +150,59 @@ public class Jeu {
 	}
 	
 	
+	
+	//LUDO 
 	private static void construireMur(Joueur leJoueur) {
+		
+		//LUDO 
+		//: demande de saisie du type d'obstacle a poser
+		
+		//LUDO on recuperer aussi la position i,j, il faut que tu vérifie avec ton plateau
 		System.out.println(
 				"Quel type d'obstacle voulez-vous poser?"
-				+ "1. poser un mur de p\n"
-				+ "2. poser un mur de g\n"
-				+ "3. lacher une caisse\n"
+				+ "1. poser un mur de pierre (restant  : " + leJoueur.nbMurPierre +")\n"
+				+ "2. poser un mur de glace  (restant  : " + leJoueur.nbMurGlace +")\n"
+				+ "3. lacher une caisse (restant  : " + leJoueur.nbCaisse +") \n"
 				);
 		switch (scanner.nextInt()) {
 		case 1:
-			System.out.println("posI?");
-			int posI = scanner.nextInt();
-			System.out.println("posJ?");
-			int posJ = scanner.nextInt();
-			plateauJeu.construireMurPierre(posI, posJ);
+			if (leJoueur.peutPoserMurPierre()) {
+				System.out.println("posI?");
+				int posI = scanner.nextInt();
+				System.out.println("posJ?");
+				int posJ = scanner.nextInt();
+				plateauJeu.construireMurPierre(posI, posJ);
+			}
+			
 			break;
 		case 2:
-			System.out.println("posI?");
-			int posi = scanner.nextInt();
-			System.out.println("posJ?");
-			int posj = scanner.nextInt();
-			plateauJeu.construireMurGlace(posi, posj);
+			if (leJoueur.peutPoserMurGlace()) {
+				System.out.println("posI?");
+				int posi = scanner.nextInt();
+				System.out.println("posJ?");
+				int posj = scanner.nextInt();
+				plateauJeu.construireMurGlace(posi, posj);
+			}
+			
 			break;
 		case 3 :
-			System.out.println("posI?");
-			int posa = scanner.nextInt();
-			System.out.println("posJ?");
-			int posb = scanner.nextInt();
-			plateauJeu.construireCaisse(posa, posb);
+			if (leJoueur.peutPoserCaisse()) {
+				System.out.println("posI?");
+				int posa = scanner.nextInt();
+				System.out.println("posJ?");
+				int posb = scanner.nextInt();
+				plateauJeu.construireCaisse(posa, posb);
+			}
 			break;
 		}
 	}
 	
+	
+	//LUDO
 	private static void etapesTour(Joueur leJoueur) {
+		
+		
+		//Affiche le tour du joueur et choix de l'étape à faire
 		System.out.println("Au tour de " + leJoueur.nom);
 		
 		plateauJeu.afficher();
@@ -205,7 +227,9 @@ public class Jeu {
 			break;
 		
 		}
-		System.out.println("Dernière étapes, voulez-vous défaussez votre main?"
+		
+		//LUDO : derniere étape : affiche et demande si le joueur veut defausser sa main
+		System.out.println("\nDernière étapes, voulez-vous défaussez votre main?"
 				+ "\n1. non et piocher les cartes manquantes pour compléter la main"
 				+ "\n2. Oui défausser ma main");
 		switch (scanner.nextInt()) {
@@ -217,6 +241,8 @@ public class Jeu {
 		
 		}
 		plateauJeu.afficher();
+		
+		//Affiche la main
 		System.out.println("Main : ");
 		int i=0;
 		for (Carte carteMainCarte : leJoueur.main_joueur) {

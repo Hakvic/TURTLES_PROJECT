@@ -3,6 +3,17 @@ import java.util.ArrayList;
 public class Plateau {
 	public static Tuile[][] plateau;
 	private static ArrayList<Joueur> listeJoueurs = new ArrayList<>();
+	
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_PURPLE = "\u001B[35m";
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_WHITE = "\u001B[37m";
+	
 	public Plateau() {
 		plateau = new Tuile[8][8];
 	}
@@ -10,6 +21,8 @@ public class Plateau {
 		plateau = new Tuile[8][8];
 		listeJoueurs = listeJ;
 	}
+	
+	
 	public void initialiser(ArrayList<Joueur> listeJ)
 	{
 		listeJoueurs = listeJ;
@@ -25,7 +38,7 @@ public class Plateau {
 		{
 			plateau[0][1] = listeJoueurs.get(0).tortue;			
 			plateau[0][5] = listeJoueurs.get(1).tortue;
-			plateau[7][3] = new Joyaux();
+			plateau[7][3] = new Joyaux(0);
 			
 			for (int i = 0; i < 8; i++) {
 				plateau[i][7] = new Caisse();
@@ -40,9 +53,9 @@ public class Plateau {
 			plateau[0][6] = listeJoueurs.get(2).tortue;
 			
 			//TODO configurer la correspondance entre joyau et tortue
-			plateau[7][0] = new Joyaux();
-			plateau[7][3] = new Joyaux();
-			plateau[7][6] = new Joyaux();
+			plateau[7][0] = new Joyaux(0);
+			plateau[7][3] = new Joyaux(1);
+			plateau[7][6] = new Joyaux(2);
 			
 			for (int i = 0; i < 8; i++) {
 				plateau[i][7] = new Caisse();
@@ -56,8 +69,8 @@ public class Plateau {
 			plateau[0][2] = listeJoueurs.get(1).tortue;
 			plateau[0][5] = listeJoueurs.get(2).tortue;
 			plateau[0][7] = listeJoueurs.get(3).tortue;		
-			plateau[7][1] = new Joyaux();
-			plateau[7][6] = new Joyaux();
+			plateau[7][1] = new Joyaux(0);
+			plateau[7][6] = new Joyaux(1);
 			
 		}
 		
@@ -82,6 +95,8 @@ public class Plateau {
 	
 	//affiche le plateau dans la console
 	public void afficher() {
+		
+		//LUDO : affiche chaque élément contenus dans le tableau
 		System.out.print(" 0 1 2 3 4 5 6 7");
 		for (int i = 0; i < 8; i++) {
 			System.out.print("\n" + i);
@@ -89,30 +104,69 @@ public class Plateau {
             	if(plateau[i][j].type == constante.TUILE.tortue)
             	{
             		Tortue thisTortue = (Tortue) plateau[i][j];
+            		switch (thisTortue.couleur) {
+					case BLEU:
+						System.out.print(ANSI_BLUE);
+						break;
+					case ROUGE:
+						System.out.print(ANSI_RED);
+						break;
+					case VERT:
+						System.out.print(ANSI_GREEN);
+						break;
+					case JAUNE:
+						System.out.print(ANSI_YELLOW);
+						break;
+
+					default:
+						break;
+					}
             		switch (thisTortue.direction) {
 					case NORD:
-						System.out.print("^|");
+						System.out.print("^");
 						break;
 					case EST:
-						System.out.print(">|");
+						System.out.print(">");
 						break;
 					case SUD:
-						System.out.print("v|");
+						System.out.print("v");
 						break;
 					case OUEST:
-						System.out.print("<|");
+						System.out.print("<");
 						break;
 							
 
 					default:
 						break;
 					}
+            		System.out.print(ANSI_RESET + "|");
             	}
             		
             	else if(plateau[i][j].type == constante.TUILE.vide)
             		System.out.print(" |");
             	else if(plateau[i][j].type == constante.TUILE.joyau)
-            		System.out.print("j|");
+            	{
+            		Joyaux thisJoyau = (Joyaux) plateau[i][j];
+            		switch (thisJoyau.couleur()) {
+					case BLEU:
+						System.out.print(ANSI_BLUE);
+						break;
+					case ROUGE:
+						System.out.print(ANSI_RED);
+						break;
+					case VERT:
+						System.out.print(ANSI_GREEN);
+						break;
+					case JAUNE:
+						System.out.print(ANSI_YELLOW);
+						break;
+
+					default:
+						break;
+					}
+            		System.out.print("j" + ANSI_RESET + "|");
+            	}
+            		
             	else if(plateau[i][j].type == constante.TUILE.caisse)
             		System.out.print("c|");
             	else if(plateau[i][j].type == constante.TUILE.murPierre)
