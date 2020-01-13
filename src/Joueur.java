@@ -1,6 +1,5 @@
 import java.util.*;
 
-import jdk.nashorn.internal.codegen.CompilerConstants;
 
 
 public class Joueur {
@@ -16,7 +15,6 @@ public class Joueur {
     public int nbMurPierre;
     public int nbCaisse;
     public Tortue tortue;
-    private Joyaux joyaux;
     private int numero;
 
     public Joueur(String nom, boolean gagnant){

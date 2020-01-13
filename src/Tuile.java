@@ -22,8 +22,9 @@ public class Tuile {
     public boolean isCaisse() {
     	return false;
 	}
-    public boolean isMur() {
-    	return false;
+
+	public boolean isMur() {
+		return false;
 	}
     public boolean isMurGlace() {
     	return false;
