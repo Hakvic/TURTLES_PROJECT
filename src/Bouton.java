@@ -14,7 +14,7 @@ import javax.swing.JButton;
 
 public class Bouton extends JButton implements MouseListener {
     private Image img;
-
+    private Boolean bouton = false;
     public Bouton() {
         super();
         this.addMouseListener(this);
@@ -29,6 +29,7 @@ public class Bouton extends JButton implements MouseListener {
         setOpaque(false);
         setForeground(Color.BLUE);
     }
+
     // Definir le background du bouton
     @Override
     public void paintComponent(Graphics g){
@@ -42,12 +43,15 @@ public class Bouton extends JButton implements MouseListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public Boolean getBouton() {
+        return bouton;
     }
 
     @Override
     public void mouseClicked(MouseEvent event) {
-
+        bouton = true;
     }
 
     @Override

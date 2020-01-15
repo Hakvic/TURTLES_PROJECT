@@ -1,3 +1,9 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
 import com.sun.deploy.ui.AboutDialog;
 import java.awt.*;
 import javax.swing.*;
@@ -10,7 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-public class Fenetre {
+public class FenetreCarte {
     JFrame frame = new JFrame();
     // creation panel general
     private JPanel container = new JPanel() ;
@@ -21,19 +27,16 @@ public class Fenetre {
     private JButton button1 = new JButton();
     private JButton button2 = new JButton();
     private JButton button3 = new JButton();
-
-    private int nombre_joueur;
-    private String joueur1;
-    private String joueur2;
-    private String joueur3;
-    private String joueur4;
+    private JButton button4 = new JButton();
+    private JButton button5 = new JButton();
 
 
-    private int compteur = 0;
+    private int commande;
 
-    public Fenetre(){
+
+    public FenetreCarte(){
         // definiton des caracteristiques de la fenetre
-        frame.setTitle("Choix du nombre de Joueur");
+        frame.setTitle("Commande");
         frame.setSize(300, 300);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -42,22 +45,22 @@ public class Fenetre {
         // Mise en place de container du titre
         Font police = new Font("Tahoma", Font.BOLD, 16);
         titre.setFont(police);
-        titre.setText("Combien de Joueurs voulez-vous ?");
+        titre.setText("Que voulez vous faire ?");
         titre.setHorizontalAlignment(JLabel.CENTER);
         this.container.add(titre, BorderLayout.NORTH);
 
         // ecoute de l'action du bouton 1
         button1.addActionListener(new BoutonListener());
-        button1.setText("2 Joueurs");
+        button1.setText("Construire le programmme");
         // ajout du bouton 1 dans le panel bouton
         this.container_button.add(button1);
 
         button2.addActionListener( new Bouton2Listener());
-        button2.setText("3 Joueurs");
+        button2.setText("Construire un mur");
         this.container_button.add(button2);
 
         button3.addActionListener( new Bouton3Listener());
-        button3.setText("4 Joueurs");
+        button3.setText("Executer le programme");
         this.container_button.add(button3);
 
         // ajout du panel bouton dans le panel general
@@ -66,60 +69,26 @@ public class Fenetre {
         frame.setVisible(true);
     }
 
-    public int getNombre_joueur() {
-        return this.nombre_joueur;
+    public int getCommande() {
+        return this.commande;
     }
 
-    private void setNombre_joueur(int nombre_joueur) {
-        this.nombre_joueur = nombre_joueur;
+    private void setCommande(int commande) {
+        this.commande = commande;
     }
 
-    private void setJoueur1(String joueur1) {
-        this.joueur1 = joueur1;
-    }
 
-    private void setJoueur2(String joueur2) {
-        this.joueur2 = joueur2;
-    }
-
-    private void setJoueur3(String joueur3) {
-        this.joueur3 = joueur3;
-    }
-
-    private void setJoueur4(String joueur4) {
-        this.joueur4 = joueur4;
-    }
-
-    public String getJoueur(int joueur) {
-        String nom_joueur;
-        switch (joueur){
-            case 0: nom_joueur = this.joueur1;
-               break;
-            case 1: nom_joueur = this.joueur2;
-                break;
-            case 2: nom_joueur = this.joueur3;
-                break;
-            case 3: nom_joueur = this.joueur4;
-                break;
-            default:
-                nom_joueur = null;
-        }
-        return nom_joueur;
-    }
 
     //Classe écoutant notre premier bouton
-    class BoutonListener implements ActionListener{
+    class BoutonListener implements ActionListener {
         //Redéfinition de la méthode actionPerformed()
         public void actionPerformed(ActionEvent arg0) {
             // Mettre l'action de l'on souhaite
-            setNombre_joueur(2);
+            setCommande(1);
+
             JOptionPane jop = new JOptionPane();
             String nom1 = jop.showInputDialog(null, "Veuillez décliner votre identité !", "Nom du premier joueur", JOptionPane.QUESTION_MESSAGE);
-            String nom2 = jop.showInputDialog(null, "Veuillez décliner votre identité !", "Nom du joueur du deuxième joueur", JOptionPane.QUESTION_MESSAGE);
-            setJoueur1(nom1);
-            System.out.println(nom1);
-            setJoueur2(nom2);
-            System.out.println(nom2);
+            String nom2 = jop.showInputDialog(null, "Veuillez décliner votre identité !", "Nom du joueur du dexième joueur", JOptionPane.QUESTION_MESSAGE);
             frame.dispose();
 
         }
@@ -131,10 +100,7 @@ public class Fenetre {
             String nom1 = jop.showInputDialog(null, "Veuillez décliner votre identité !", "Nom du premier joueur", JOptionPane.QUESTION_MESSAGE);
             String nom2 = jop.showInputDialog(null, "Veuillez décliner votre identité !", "Nom du joueur du dexième joueur", JOptionPane.QUESTION_MESSAGE);
             String nom3 = jop.showInputDialog(null, "Veuillez décliner votre identité !", "Nom du joueur du troisème joueur", JOptionPane.QUESTION_MESSAGE);
-            setNombre_joueur(3);
-            setJoueur1(nom1);
-            setJoueur2(nom2);
-            setJoueur3(nom3);
+            setCommande(2);
             frame.dispose();
         }
     }
@@ -146,11 +112,7 @@ public class Fenetre {
             String nom2 = jop.showInputDialog(null, "Veuillez décliner votre identité !", "Nom du joueur du deuxième joueur", JOptionPane.QUESTION_MESSAGE);
             String nom3 = jop.showInputDialog(null, "Veuillez décliner votre identité !", "Nom du joueur du troisèmejoueur", JOptionPane.QUESTION_MESSAGE);
             String nom4 = jop.showInputDialog(null, "Veuillez décliner votre identité !", "Nom du joueur du quatrième joueur", JOptionPane.QUESTION_MESSAGE);
-            setNombre_joueur(4);
-            setJoueur1(nom1);
-            setJoueur2(nom2);
-            setJoueur3(nom3);
-            setJoueur4(nom4);
+            setCommande(3);
             frame.dispose();
         }
     }

@@ -13,12 +13,14 @@ public class Plateau {
 	public static final String ANSI_PURPLE = "\u001B[35m";
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_WHITE = "\u001B[37m";
+	FenetrePlateau affiche_plateau;
 
 	public Plateau() {
 		plateau = new Tuile[8][8];
 	}
 
-	public Plateau(ArrayList<Joueur> listeJ) {
+	public Plateau(ArrayList<Joueur> listeJ, FenetrePlateau affiche_plateau) {
+		this.affiche_plateau = affiche_plateau;
 		plateau = new Tuile[8][8];
 		listeJoueurs = listeJ;
 	}
@@ -85,13 +87,17 @@ public class Plateau {
 	// affiche le plateau dans la console
 	public void afficher() {
 
-		// LUDO : affiche chaque élément contenus dans le tableau
+		// LUDO : affiche chaque ï¿½lï¿½ment contenus dans le tableau
 		System.out.print(" 0 1 2 3 4 5 6 7");
 		for (int i = 0; i < 8; i++) {
 			System.out.print("\n" + i);
 			for (int j = 0; j < 8; j++) {
 				if (plateau[i][j].type == constante.TUILE.tortue) {
 					Tortue thisTortue = (Tortue) plateau[i][j];
+
+					// plot tortue graphique
+					this.affiche_plateau.setButton(i,j, thisTortue.fichierImage());
+
 					switch (thisTortue.couleur) {
 					case BLEU:
 						System.out.print(ANSI_BLUE);
@@ -102,7 +108,7 @@ public class Plateau {
 					case VERT:
 						System.out.print(ANSI_GREEN);
 						break;
-					case JAUNE:
+					case VIOLET:
 						System.out.print(ANSI_YELLOW);
 						break;
 
@@ -129,10 +135,18 @@ public class Plateau {
 					System.out.print(ANSI_RESET + "|");
 				}
 
-				else if (plateau[i][j].type == constante.TUILE.vide)
+				else if (plateau[i][j].type == constante.TUILE.vide) {
 					System.out.print(" |");
+
+					// remove backgroud button graphique
+					this.affiche_plateau.resetButton(i,j);
+				}
 				else if (plateau[i][j].type == constante.TUILE.joyau) {
 					Joyaux thisJoyau = (Joyaux) plateau[i][j];
+
+					// plot joyaux graphique
+					this.affiche_plateau.setButton(i,j,thisJoyau.fichierImage());
+
 					switch (thisJoyau.couleur()) {
 					case BLEU:
 						System.out.print(ANSI_BLUE);
@@ -143,7 +157,7 @@ public class Plateau {
 					case VERT:
 						System.out.print(ANSI_GREEN);
 						break;
-					case JAUNE:
+					case VIOLET:
 						System.out.print(ANSI_YELLOW);
 						break;
 
@@ -154,11 +168,22 @@ public class Plateau {
 				}
 
 				else if (plateau[i][j].type == constante.TUILE.caisse)
+				{
 					System.out.print("c|");
-				else if (plateau[i][j].type == constante.TUILE.murPierre)
+					//plot wood box graphique
+					affiche_plateau.setButton(i,j,"./images/WoodBox.png");
+				}
+
+				else if (plateau[i][j].type == constante.TUILE.murPierre){
 					System.out.print("p|");
-				else if (plateau[i][j].type == constante.TUILE.murGlace)
+					// plot mur pierre graphique
+					affiche_plateau.setButton(i,j,"./images/MURPIERRE.png");
+				}else if (plateau[i][j].type == constante.TUILE.murGlace){
 					System.out.print("g|");
+					// plot mur glace graphique
+					affiche_plateau.setButton(i,j,"./images/MURGLACE.png");
+				}
+
 
 			}
 

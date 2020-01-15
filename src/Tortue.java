@@ -13,7 +13,7 @@ public class Tortue extends Tuile {
 		// appeler le constructeur de la classe mere
 		this.type = constante.TUILE.tortue;
 		this.couleur = constante.COULEUR.values()[numero];
-		this.direction = constante.DIRECTION.NORD;
+		this.direction = constante.DIRECTION.SUD;
 		this.retournerPositionInit = false;
 	}
 
@@ -39,5 +39,9 @@ public class Tortue extends Tuile {
 		this.pivoterDroite();
 		this.pivoterDroite();
 
+	}
+
+	public String fichierImage(){
+		return "./images/turtles/" + this.couleur + this.direction + ".jpg";
 	}
 }

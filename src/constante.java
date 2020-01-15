@@ -31,7 +31,7 @@ public class constante {
 	
 	public enum COULEUR
 	{
-		BLEU, ROUGE, VERT, JAUNE
+		BLEU, ROUGE, VERT, VIOLET
 	}
 	
 	
