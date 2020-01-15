@@ -6,4 +6,9 @@ public class Carte {
         this.couleur = couleur;
     }
 
+    public String fichierImage(){
+        return "./images/cards/" + this.couleur + ".png";
+    }
 }
+
+

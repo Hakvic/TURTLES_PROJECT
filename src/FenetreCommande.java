@@ -90,9 +90,6 @@ public class FenetreCommande {
         public void actionPerformed(ActionEvent arg0) {
             // Mettre l'action de l'on souhaite
             setCommande(1);
-            JOptionPane jop = new JOptionPane();
-            String nom1 = jop.showInputDialog(null, "Veuillez décliner votre identité !", "Nom du premier joueur", JOptionPane.QUESTION_MESSAGE);
-            String nom2 = jop.showInputDialog(null, "Veuillez décliner votre identité !", "Nom du joueur du dexième joueur", JOptionPane.QUESTION_MESSAGE);
             frame.dispose();
 
         }

@@ -92,7 +92,7 @@ public class FenetrePlateau extends JFrame {
         // creation du tableau de case
         for(int y=0; y<8; y++){
             for(int x=0; x<8; x++){
-                this.tabBouton[y][x] = new Bouton();
+                this.tabBouton[y][x] = new Bouton(y,x);
             }
         }
 
@@ -156,7 +156,7 @@ public class FenetrePlateau extends JFrame {
     public void setQuatrieme(String quatrieme){
         this.premier.setText(quatrieme);
     }
-
+/*
     private void getPosBouton(){
         Boolean status = false;
         do {
@@ -180,7 +180,7 @@ public class FenetrePlateau extends JFrame {
     public int getPositionBoutonY(){
         return this.positionBoutonY;
     }
-
+*/
 }
 
 

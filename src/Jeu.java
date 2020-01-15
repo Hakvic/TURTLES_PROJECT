@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+import java.util.Arrays;
 
 import sun.management.counter.Variability;
 
@@ -21,12 +23,14 @@ public class Jeu {
 	public static Fenetre affiche_menu_joueur;
 	public static FenetreCommande affiche_commande;
 	public static FenetreDefausse affiche_defausse;
+	public static FenetreMain affiche_main;
 
     private volatile int choice;
     private volatile String nomJoueurString;
     private volatile int commande;
     private volatile int rangMur;
     private volatile int defausse;
+    private volatile Integer[] choix = new Integer[5];
 
 	public void initialiserPartie() {
 		initialiserJoueurs();
@@ -127,36 +131,34 @@ public class Jeu {
 		}
 	}
 
-	private static boolean completerProgramme(Joueur leJoueur) {
+	private  void completerProgramme(Joueur leJoueur) {
 		System.out.println("Le programme a " + leJoueur.programme.size() + "instruction(s)");
 		for (Carte carteProgrammeCarte : leJoueur.programme) {
 			System.out.print(carteProgrammeCarte.couleur + " ");
 		}
 
 		System.out.println("Main : ");
+		affiche_main = new FenetreMain();
+
 		int i = 0;
 		for (Carte carteMainCarte : leJoueur.main_joueur) {
 			System.out.print(i + "." + carteMainCarte.couleur + " ");
+			affiche_main.setCarteCouleur(carteMainCarte.fichierImage(), i);
 			i++;
 		}
 
 		System.out.println("\nQuelle carte de la main voulez-vous ajouter au programme ?");
-		int choix = scanner.nextInt();
-		if (choix > i) {
-			System.out.println("\nla main ne contient que " + i + " carte(s), veuillez r�essayer");
-			completerProgramme(leJoueur);
-			return false;
-		} else {
-			leJoueur.programme.add(leJoueur.main_joueur.get(choix));
-			System.out.println("La carte " + leJoueur.main_joueur.get(choix).couleur + " a �t� ajout� au programme");
-			leJoueur.main_joueur.remove(choix);
-			System.out.println("\nVoulez-vous ajouter une autre carte ?" + "\n1. Oui" + "\n2 . Non");
-			if (scanner.nextInt() == 1) {
-				return completerProgramme(leJoueur);
-			} else {
-				return false;
-			}
 
+		do{
+			this.choix = affiche_main.getPosBouton();
+		}while (!affiche_main.getClose());
+		Arrays.sort(choix, Collections.reverseOrder());
+		for (int choi : this.choix){
+			if(choi != 100){
+				leJoueur.programme.add(leJoueur.main_joueur.get(choi));
+				System.out.println("La carte " + leJoueur.main_joueur.get(choi).couleur + " a �t� ajout� au programme");
+				leJoueur.main_joueur.remove(choi);
+			}
 		}
 
 	}
@@ -233,8 +235,8 @@ public class Jeu {
 		do {
 			this.commande = affiche_commande.getCommande();
 		} while (this.commande < 1 || this.commande > 3);
-
-		switch (commande) {
+		System.out.println(this.commande);
+		switch (this.commande) {
 		case 1:
 			completerProgramme(leJoueur);
 			break;

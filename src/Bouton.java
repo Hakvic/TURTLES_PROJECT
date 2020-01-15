@@ -3,6 +3,8 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -12,12 +14,19 @@ import javax.swing.*;
 import javax.swing.JButton;
 
 
-public class Bouton extends JButton implements MouseListener {
+public class Bouton extends JButton implements ActionListener {
     private Image img;
-    private Boolean bouton = false;
-    public Bouton() {
+    private int[] position = new int[2];
+    private int y;
+    private int x;
+
+    public Bouton(int y, int x) {
         super();
-        this.addMouseListener(this);
+        this.y = y;
+        this.x = x;
+        this.position[0] = 100;
+        this.position[1] = 100;
+        addActionListener(this);
     }
 
     // Mettre les boutons tranparents
@@ -45,31 +54,13 @@ public class Bouton extends JButton implements MouseListener {
         }
     }
 
-    public Boolean getBouton() {
-        return bouton;
+    public int[] getPosition() {
+        return position;
     }
 
     @Override
-    public void mouseClicked(MouseEvent event) {
-        bouton = true;
-    }
-
-    @Override
-    public void mousePressed(MouseEvent event) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent event) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent event) {
-     }
-
-    @Override
-    public void mouseExited(MouseEvent event) {
-
+    public void actionPerformed(ActionEvent e) {
+        this.position[0] = this.y;
+        this.position[1] = this.x;
     }
 }
