@@ -54,6 +54,10 @@ public class Bouton extends JButton implements ActionListener {
         }
     }
 
+    public void setImg(){
+        img= null;
+    }
+
     public int[] getPosition() {
         return position;
     }

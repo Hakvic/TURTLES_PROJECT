@@ -8,7 +8,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class FenetrePlateau extends JFrame {
+public class FenetrePlateau{
+    private JFrame frame = new JFrame();
     private JPanel container = new JPanel();
     private Plateau plateau = new Plateau();
     private Bouton[][] tabBouton = new Bouton[8][8];
@@ -27,9 +28,9 @@ public class FenetrePlateau extends JFrame {
 
     public FenetrePlateau() {
         // definiton des caracteristiques de la fenetre
-        this.setSize(500, 500);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+        this.frame.setSize(500, 500);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setLocationRelativeTo(null);
 
         // set lajout of the principal container and plateau
         this.container.setLayout(new BorderLayout());
@@ -99,8 +100,8 @@ public class FenetrePlateau extends JFrame {
         this.container.add(this.tourLabel, BorderLayout.NORTH);
         this.container.add(plateau, BorderLayout.CENTER);
         this.container.add(this.east, BorderLayout.EAST);
-        this.setContentPane(container);
-        this.setVisible(true);
+        this.frame.setContentPane(container);
+        this.frame.setVisible(true);
 
     }
 
@@ -118,12 +119,13 @@ public class FenetrePlateau extends JFrame {
 
     public void setButton(int i, int j, String path_icon) {
         this.tabBouton[j][i].setImg(path_icon);
-        repaint();
+        this.frame.repaint();
     }
 
     public void resetButton(int i, int j) {
-        this.tabBouton[j][i].updateUI();
-        repaint();
+        //this.tabBouton[j][i].se
+        this.tabBouton[j][i].setImg();
+        this.tabBouton[j][i].repaint();
     }
 
     public void setTourLabel(String tour) {

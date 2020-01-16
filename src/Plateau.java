@@ -87,7 +87,6 @@ public class Plateau {
 	// affiche le plateau dans la console
 	public void afficher() {
 
-		// LUDO : affiche chaque �l�ment contenus dans le tableau
 		System.out.print(" 0 1 2 3 4 5 6 7");
 		for (int i = 0; i < 8; i++) {
 			System.out.print("\n" + i);
