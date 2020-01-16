@@ -1,25 +1,17 @@
-import com.sun.deploy.ui.AboutDialog;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class FenetrePlateau extends JFrame {
-    private JPanel container = new JPanel() ;
+    private JPanel container = new JPanel();
     private Plateau plateau = new Plateau();
-    private Bouton [][] tabBouton = new Bouton[8][8];
+    private Bouton[][] tabBouton = new Bouton[8][8];
     private JLabel tourLabel = new JLabel();
     private JLabel infoPierre = new JLabel();
     private JLabel infoGlace = new JLabel();
@@ -30,21 +22,21 @@ public class FenetrePlateau extends JFrame {
     private JLabel troisieme = new JLabel();
     private JLabel quatrieme = new JLabel();
     private JPanel west = new JPanel();
-    private int positionBoutonX;
-    private int positionBoutonY;
+    private int[] position = new int[2];
+    private int[] new_position = new int[2];
 
-    public FenetrePlateau(){
+    public FenetrePlateau() {
         // definiton des caracteristiques de la fenetre
         this.setSize(500, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
-        // set layout of the principal container and plateau
+        // set lajout of the principal container and plateau
         this.container.setLayout(new BorderLayout());
-        this.plateau.setLayout(new GridLayout(8,8));
+        this.plateau.setLayout(new GridLayout(8, 8));
         this.plateau.setOpaque(false);
-        this.east.setLayout(new GridLayout(3,1));
-        this.east.setLayout(new GridLayout(4,1));
+        this.east.setLayout(new GridLayout(3, 1));
+        this.east.setLayout(new GridLayout(4, 1));
 
         Font police = new Font("Tahoma", Font.BOLD, 16);
         this.tourLabel.setFont(police);
@@ -90,16 +82,16 @@ public class FenetrePlateau extends JFrame {
 
 
         // creation du tableau de case
-        for(int y=0; y<8; y++){
-            for(int x=0; x<8; x++){
-                this.tabBouton[y][x] = new Bouton(y,x);
+        for (int j = 0; j < 8; j++) {
+            for (int i = 0; i < 8; i++) {
+                this.tabBouton[j][i] = new Bouton(j, i);
             }
         }
 
         // ajout de case dans le plateau
-        for(int x=0; x<8; x++){
-            for(int y=0; y<8; y++){
-                this.plateau.add(this.tabBouton[y][x],BorderLayout.CENTER);
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                this.plateau.add(this.tabBouton[j][i], BorderLayout.CENTER);
             }
         }
 
@@ -112,9 +104,9 @@ public class FenetrePlateau extends JFrame {
 
     }
 
-    private class Plateau extends JPanel{
+    private class Plateau extends JPanel {
         @Override
-        public void paintComponent(Graphics g){
+        public void paintComponent(Graphics g) {
             try {
                 Image img = ImageIO.read(new File("./images/background.jpeg"));
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
@@ -124,65 +116,57 @@ public class FenetrePlateau extends JFrame {
         }
     }
 
-    public void setButton(int x, int y, String path_icon){
-        this.tabBouton[y][x].setImg(path_icon);
+    public void setButton(int i, int j, String path_icon) {
+        this.tabBouton[j][i].setImg(path_icon);
         repaint();
     }
 
-    public void resetButton(int x, int y){
-        this.tabBouton[y][x].updateUI();
+    public void resetButton(int i, int j) {
+        this.tabBouton[j][i].updateUI();
         repaint();
     }
 
-    public void setTourLabel(String tour){
+    public void setTourLabel(String tour) {
         this.tourLabel.setText(tour);
     }
 
-    public void setInfoMur(String pierre, String glace, String caisse){
+    public void setInfoMur(String pierre, String glace, String caisse) {
         this.infoPierre.setText(pierre);
         this.infoGlace.setText(glace);
         this.infoCaisse.setText(caisse);
     }
 
-    public void setPremier(String premier){
+    public void setPremier(String premier) {
         this.premier.setText(premier);
     }
-    public void setDeuxieme(String deuxieme){
+
+    public void setDeuxieme(String deuxieme) {
         this.premier.setText(deuxieme);
     }
-    public void setTroisieme(String troisieme){
+
+    public void setTroisieme(String troisieme) {
         this.premier.setText(troisieme);
     }
-    public void setQuatrieme(String quatrieme){
+
+    public void setQuatrieme(String quatrieme) {
         this.premier.setText(quatrieme);
     }
-/*
-    private void getPosBouton(){
-        Boolean status = false;
-        do {
-            for (int y = 0; y < 8; y++) {
-                for (int x = 0; x < 8; x++) {
-                    if (this.tabBouton[y][x].getBouton()) {
-                        this.positionBoutonX = x;
-                        this.positionBoutonY = y;
-                        status = true;
-                    }
+
+    public int[] getPosBouton() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                position = this.tabBouton[j][i].getPosition();
+                if (position[0] != 100){
+                    this.new_position = position;
+                }else {
+                    this.new_position[0] = 100;
                 }
             }
-        }while (status);
+        }
+       // System.out.println(new_position[0]);
+        return this.new_position;
     }
-
-    public int getPositionBoutonX(){
-        getPosBouton();
-        return this.positionBoutonX;
-    }
-
-    public int getPositionBoutonY(){
-        return this.positionBoutonY;
-    }
-*/
 }
-
 
 
 

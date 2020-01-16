@@ -31,6 +31,7 @@ public class Jeu {
     private volatile int rangMur;
     private volatile int defausse;
     private volatile Integer[] choix = new Integer[5];
+    private volatile int[] position_mur = new int[2];
 
 	public void initialiserPartie() {
 		initialiserJoueurs();
@@ -178,38 +179,32 @@ public class Jeu {
 			this.rangMur = affiche_commande.getRang_mur();
 		} while (this.rangMur < 0 || this.rangMur > 2);
 
+		System.out.println(rangMur);
+
 		switch (this.rangMur) {
 		case 0:
 			if (leJoueur.peutPoserMurPierre()) {
-				System.out.println("posI?");
-				//int posJ = affiche_plateau.getPositionBoutonX();
-				//System.out.println(posJ);
-				int posI = scanner.nextInt();
-				System.out.println("posJ?");
-				//int posI = affiche_plateau.getPositionBoutonY();
-				//System.out.println(posI);
-				int posJ = scanner.nextInt();
-				plateauJeu.construireMurPierre(posI, posJ);
+				do{
+					this.position_mur = affiche_plateau.getPosBouton();
+				}while (position_mur[0] == 100);
+				plateauJeu.construireMurPierre(this.position_mur[1], this.position_mur[0]);
 			}
-
 			break;
 		case 1:
 			if (leJoueur.peutPoserMurGlace()) {
-				System.out.println("posI?");
-				int posi = scanner.nextInt();
-				System.out.println("posJ?");
-				int posj = scanner.nextInt();
-				plateauJeu.construireMurGlace(posi, posj);
+				do{
+					this.position_mur = affiche_plateau.getPosBouton();
+				}while (position_mur[0] == 100);
+				plateauJeu.construireMurGlace(this.position_mur[1], this.position_mur[0]);
 			}
 
 			break;
 		case 2:
 			if (leJoueur.peutPoserCaisse()) {
-				System.out.println("posI?");
-				int posa = scanner.nextInt();
-				System.out.println("posJ?");
-				int posb = scanner.nextInt();
-				plateauJeu.construireCaisse(posa, posb);
+				do{
+					this.position_mur = affiche_plateau.getPosBouton();
+				}while (position_mur[0] == 100);
+				plateauJeu.construireCaisse(this.position_mur[1], this.position_mur[0]);
 			}
 			break;
 		}

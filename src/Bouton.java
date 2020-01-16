@@ -17,13 +17,13 @@ import javax.swing.JButton;
 public class Bouton extends JButton implements ActionListener {
     private Image img;
     private int[] position = new int[2];
-    private int y;
-    private int x;
+    private int j;
+    private int i;
 
-    public Bouton(int y, int x) {
+    public Bouton(int j, int i) {
         super();
-        this.y = y;
-        this.x = x;
+        this.j = j;
+        this.i = i;
         this.position[0] = 100;
         this.position[1] = 100;
         addActionListener(this);
@@ -60,7 +60,7 @@ public class Bouton extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.position[0] = this.y;
-        this.position[1] = this.x;
+        this.position[0] = this.j;
+        this.position[1] = this.i;
     }
 }
