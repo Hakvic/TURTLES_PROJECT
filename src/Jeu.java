@@ -127,7 +127,7 @@ public class Jeu {
 			default:
 				break;
 			}
-			leJoueur.programme.remove(carteProgrammeCarte);
+			leJoueur.defausserCarteExecute(carteProgrammeCarte);
 			plateauJeu.afficher();
 		}
 	}
