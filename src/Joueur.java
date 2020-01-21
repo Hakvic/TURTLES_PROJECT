@@ -8,6 +8,7 @@ public class Joueur {
 
     public boolean gagnant;
     public ArrayList<Carte> main_joueur;
+    private ArrayList<Carte> defausse;
     private ArrayDeque<Carte> jeu_carte;
     public ArrayDeque<Carte> programme;
     
@@ -33,6 +34,7 @@ public class Joueur {
         this.nbMurPierre = 3;
         this.programme = new ArrayDeque<Carte>();
         this.main_joueur = new ArrayList<Carte>();
+        this.defausse = new ArrayList<Carte>();
         this.piocherCartes();
     }
     
@@ -71,19 +73,37 @@ public class Joueur {
     }
     
     public void defausserMain() {
+    	for(Carte laCarte : main_joueur)
+    	{
+    		defausse.add(laCarte);
+    	}
 		main_joueur = new ArrayList<Carte>();
+		
 	}
     
     
     //Pioche le nombre de carte manquant dans la main
     public void piocherCartes() {
+    	if(!(main_joueur.size() > 5))
+    	{
+    		Collections.shuffle(defausse);
+    		jeu_carte.addAll(defausse);
+    	}
 		for (int i = main_joueur.size(); i < 5; i++) {
 			main_joueur.add(jeu_carte.pollFirst());
 		}
 	}
     
+    public void defausserCarteExecute(Carte laCarte)
+    {
+    	programme.remove(laCarte);
+    	defausse.add(laCarte);
+		
+    }
+    
     public void ajouterAuProgramme(Carte uneCarte) {
     	programme.add(uneCarte);
+    	main_joueur.remove(uneCarte);
 	}
     
     public boolean peutPoserMurPierre() {

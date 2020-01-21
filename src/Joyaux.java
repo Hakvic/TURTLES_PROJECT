@@ -1,5 +1,5 @@
 public class Joyaux extends Tuile {
-	private String couleur;
+	private constante.COULEUR couleur;
 	private int numero;
 
 	public Joyaux() {
@@ -11,6 +11,7 @@ public class Joyaux extends Tuile {
 		// appeler le constructeur de la classe mere
 		this.type = constante.TUILE.joyau;
 		this.numero = num;
+		this.couleur = constante.COULEUR.values()[numero];
 	}
 
 	public constante.COULEUR couleur() {
@@ -21,4 +22,8 @@ public class Joyaux extends Tuile {
 		return true;
 	}
 
+	public String fichierImage(){
+		return "./images/joyaux/" + this.couleur + ".jpg";
+	}
 }
+
